@@ -23,7 +23,7 @@ class TestProviderService(TestCase):
         ]
 
         # when
-        best_provider = service.get_best_provider_of(providers)
+        best_provider = service.find_best_of(providers)
 
         # then
         self.assertEqual(1230, best_provider.higher_position())

@@ -22,23 +22,20 @@ def providers_to_hire(final_position):
     coverage = 0
     providers = []
 
-    service = ProviderService()
+    provider_service = ProviderService()
     while coverage < final_position:
-        filtered_providers = filter_data = list(
+        filtered_providers = list(
             filter(lambda provider: provider.lower_position() < coverage, sorted_providers_available))
-        new_provider = service.get_best_provider_of(filtered_providers)
+        new_provider = provider_service.find_best_of(filtered_providers)
         providers.append(new_provider)
         coverage = new_provider.higher_position()
-
-        # remove unnecessary providers
-        sorted_providers_available = [provider for provider in sorted_providers_available if
-                                      provider not in filter_data]
+        sorted_providers_available = provider_service.subtract(sorted_providers_available, filtered_providers)
     return providers
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    providers = providers_to_hire(500)
+    providers = providers_to_hire(210)
     print(providers)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
