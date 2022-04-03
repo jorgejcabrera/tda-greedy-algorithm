@@ -26,4 +26,4 @@ class ProviderService:
 
     def find_all_with_coverage_below(self, providers, position):
         return list(
-            filter(lambda provider: provider.lower_position() < position, providers))
+            filter(lambda provider: provider.lower_position() <= position, providers))

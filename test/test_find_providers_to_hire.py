@@ -26,7 +26,7 @@ class TestFindProvidersToHireUseCase(TestCase):
 
         # then
         self.assertTrue(len(providers_to_hire) == 4)
-        self.assertTrue(Provider(radius=150, position=50, provider_id=10)
+        self.assertTrue(Provider(radius=100, position=100, provider_id=6)
                         in providers_to_hire)
         self.assertTrue(Provider(radius=200, position=300, provider_id=7)
                         in providers_to_hire)
@@ -56,7 +56,7 @@ class TestFindProvidersToHireUseCase(TestCase):
 
         # then
         self.assertTrue(len(providers_to_hire) == 2)
-        self.assertTrue(Provider(radius=150, position=50, provider_id=10)
+        self.assertTrue(Provider(radius=100, position=100, provider_id=6)
                         in providers_to_hire)
         self.assertTrue(Provider(radius=200, position=300, provider_id=7)
                         in providers_to_hire)
@@ -78,10 +78,8 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers_to_hire = use_case.invoke(providers, 500)
 
         # then
-        self.assertTrue(len(providers_to_hire) == 4)
-        self.assertTrue(Provider(radius=50, position=44, provider_id=1)
-                        in providers_to_hire)
-        self.assertTrue(Provider(radius=80, position=100, provider_id=4)
+        self.assertTrue(len(providers_to_hire) == 3)
+        self.assertTrue(Provider(radius=80, position=80, provider_id=5)
                         in providers_to_hire)
         self.assertTrue(Provider(radius=160, position=300, provider_id=6)
                         in providers_to_hire)
@@ -106,9 +104,27 @@ class TestFindProvidersToHireUseCase(TestCase):
 
         # then
         self.assertTrue(len(providers_to_hire) == 3)
-        self.assertTrue(Provider(radius=150, position=50, provider_id=1)
+        self.assertTrue(Provider(radius=100, position=100, provider_id=2)
                         in providers_to_hire)
         self.assertTrue(Provider(radius=275, position=450, provider_id=5)
                         in providers_to_hire)
         self.assertTrue(Provider(radius=150, position=850, provider_id=7)
+                        in providers_to_hire)
+
+    def test_instance_five(self):
+        # given
+        use_case = FindProvidersToHireUseCase()
+        providers = [
+            Provider(radius=250, position=250, provider_id=1),
+            Provider(radius=250, position=750, provider_id=2)
+        ]
+
+        # when
+        providers_to_hire = use_case.invoke(providers, 1000)
+
+        # then
+        self.assertTrue(len(providers_to_hire) == 2)
+        self.assertTrue(Provider(radius=250, position=250, provider_id=1)
+                        in providers_to_hire)
+        self.assertTrue(Provider(radius=250, position=750, provider_id=2)
                         in providers_to_hire)
