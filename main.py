@@ -1,5 +1,5 @@
 from provider import Provider
-
+from provider_service import ProviderService
 
 def create_providers():
     return [
@@ -16,23 +16,17 @@ def create_providers():
     ]
 
 
-def get_best_provider_of(filtered_providers):
-    new_provider = filtered_providers.pop()
-    for filtered_provider in filtered_providers:
-        if filtered_provider.higher_position() > new_provider.higher_position():
-            new_provider = filtered_provider
-    return new_provider
-
-
 def providers_to_hire(final_position):
     providers_available = create_providers()
     sorted_providers_available = sorted(providers_available, key=lambda x: x.lower_position())
     coverage = 0
     providers = []
+
+    service = ProviderService()
     while coverage < final_position:
         filtered_providers = filter_data = list(
             filter(lambda provider: provider.lower_position() < coverage, sorted_providers_available))
-        new_provider = get_best_provider_of(filtered_providers)
+        new_provider = service.get_best_provider_of(filtered_providers)
         providers.append(new_provider)
         coverage = new_provider.higher_position()
 
@@ -44,7 +38,7 @@ def providers_to_hire(final_position):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    providers = providers_to_hire(1000)
+    providers = providers_to_hire(500)
     print(providers)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

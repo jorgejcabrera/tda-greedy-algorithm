@@ -10,14 +10,18 @@ class TestProvider(TestCase):
         radius = 250
         position = 980
         provider = Provider(radius=radius, position=position, provider_id=1)
-        expected_position = radius + position
+        expected_position = position - radius
 
         # then
         self.assertEqual(expected_position, provider.lower_position())
 
     def test_higher_position_must_be_ok(self):
         # given
+        radius = 250
+        position = 980
+        expected_position = radius + position
+
         provider = Provider(radius=250, position=980, provider_id=1)
 
         # then
-        self.assertEqual(1230, provider.higher_position())
+        self.assertEqual(expected_position, provider.higher_position())
