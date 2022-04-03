@@ -1,5 +1,5 @@
+from find_providers_to_hire import FindProvidersToHireUseCase
 from provider import Provider
-from provider_service import ProviderService
 
 
 def create_providers():
@@ -17,23 +17,8 @@ def create_providers():
     ]
 
 
-def providers_to_hire(final_position):
-    providers_available = create_providers()
-    provider_service = ProviderService()
-
-    sorted_providers = provider_service.sort(providers_available)
-    coverage = 0
-    providers = []
-
-    while coverage < final_position:
-        filtered_providers = provider_service.find_all_with_coverage_below(sorted_providers, coverage)
-        new_provider = provider_service.find_the_best_of(filtered_providers)
-        providers.append(new_provider)
-        coverage = new_provider.higher_position()
-        sorted_providers = provider_service.subtract(sorted_providers, filtered_providers)
-    return providers
-
-
 if __name__ == '__main__':
-    providers = providers_to_hire(1000)
-    print(providers)
+    providers = create_providers()
+    use_case = FindProvidersToHireUseCase()
+    providers_to_hire = use_case.invoke(providers, 1000)
+    print(providers_to_hire)
