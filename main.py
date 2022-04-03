@@ -19,18 +19,18 @@ def create_providers():
 
 def providers_to_hire(final_position):
     providers_available = create_providers()
-    sorted_providers_available = sorted(providers_available, key=lambda x: x.lower_position())
+    provider_service = ProviderService()
+
+    sorted_providers = provider_service.sort(providers_available)
     coverage = 0
     providers = []
 
-    provider_service = ProviderService()
     while coverage < final_position:
-        filtered_providers = list(
-            filter(lambda provider: provider.lower_position() < coverage, sorted_providers_available))
-        new_provider = provider_service.find_best_of(filtered_providers)
+        filtered_providers = provider_service.find_all_with_coverage_below(sorted_providers, coverage)
+        new_provider = provider_service.find_the_best_of(filtered_providers)
         providers.append(new_provider)
         coverage = new_provider.higher_position()
-        sorted_providers_available = provider_service.subtract(sorted_providers_available, filtered_providers)
+        sorted_providers = provider_service.subtract(sorted_providers, filtered_providers)
     return providers
 
 
