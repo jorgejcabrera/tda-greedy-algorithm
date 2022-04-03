@@ -1,6 +1,7 @@
 from provider import Provider
 from provider_service import ProviderService
 
+
 def create_providers():
     return [
         Provider(radius=250, position=980, provider_id=1),
@@ -33,9 +34,6 @@ def providers_to_hire(final_position):
     return providers
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    providers = providers_to_hire(210)
+    providers = providers_to_hire(1000)
     print(providers)
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

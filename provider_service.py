@@ -12,7 +12,8 @@ class ProviderService:
                 new_provider = provider
         return new_provider
 
-    # TODO testear
-    def subtract(self, sorted_providers_available, filter_data):
-        return [provider for provider in sorted_providers_available if
-                provider not in filter_data]
+    def subtract(self, providers, providers_to_subtract):
+        for provider_to_subtract in providers_to_subtract:
+            if provider_to_subtract in providers:
+                providers.remove(provider_to_subtract)
+        return providers
