@@ -11,7 +11,7 @@ class FindProvidersToHireUseCase:
         coverage = 0
         providers_to_hire = []
 
-        while coverage < target_position:
+        while coverage < target_position and len(sorted_providers) > 0:
             filtered_providers = self.service.find_all_with_coverage_below(sorted_providers, coverage)
             sorted_providers = self.service.subtract(sorted_providers, filtered_providers)
             new_provider = self.service.find_the_best_of(filtered_providers)

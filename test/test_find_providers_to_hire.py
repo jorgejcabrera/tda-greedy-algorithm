@@ -148,3 +148,19 @@ class TestFindProvidersToHireUseCase(TestCase):
                         in providers_to_hire)
         self.assertTrue(Provider(radius=40, position=140, provider_id=3)
                         in providers_to_hire)
+
+    def test_instance_without_a_solution_should_find_at_least_a_couple_of_providers(self):
+        # given
+        use_case = FindProvidersToHireUseCase()
+        providers = [
+            Provider(radius=50, position=50, provider_id=1),
+            Provider(radius=50, position=100, provider_id=2),
+            Provider(radius=40, position=140, provider_id=3),
+            Provider(radius=30, position=150, provider_id=4)
+        ]
+
+        # when
+        providers_to_hire = use_case.invoke(providers, 1000)
+
+        # then
+        self.assertTrue(len(providers_to_hire) == 3)
