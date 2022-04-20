@@ -1,4 +1,5 @@
 from provider import Provider
+import random
 
 
 def instance_one():
@@ -51,3 +52,13 @@ def instance_four():
         Provider(radius=50, position=650, provider_id=6),
         Provider(radius=150, position=850, provider_id=7)
     ]
+
+
+def sample_of(amount_of_providers, kilometers):
+    segments = int(kilometers / amount_of_providers)
+    providers = []
+    for i in range(amount_of_providers):
+        position = random.randint(segments * (i + 1), segments * (i + 2))
+        radius = random.randint(1, kilometers)
+        providers.append(Provider(provider_id=i, position=position, radius=radius))
+    return providers
