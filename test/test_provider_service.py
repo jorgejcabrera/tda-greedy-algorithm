@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from provider import Provider
 from provider_service import ProviderService
+from test.providers_factory import instance_one, instance_two
 
 
 class TestProviderService(TestCase):
@@ -9,18 +10,7 @@ class TestProviderService(TestCase):
     def test_the_best_provider_must_reach_the_highest_position(self):
         # given
         service = ProviderService()
-        providers = [
-            Provider(radius=250, position=980, provider_id=1),
-            Provider(radius=100, position=500, provider_id=2),
-            Provider(radius=150, position=600, provider_id=3),
-            Provider(radius=300, position=850, provider_id=4),
-            Provider(radius=80, position=270, provider_id=5),
-            Provider(radius=100, position=100, provider_id=6),
-            Provider(radius=200, position=300, provider_id=7),
-            Provider(radius=120, position=400, provider_id=8),
-            Provider(radius=220, position=680, provider_id=9),
-            Provider(radius=150, position=50, provider_id=10)
-        ]
+        providers = instance_one()
 
         # when
         best_provider = service.find_the_best_of(providers)
@@ -28,31 +18,11 @@ class TestProviderService(TestCase):
         # then
         self.assertEqual(1230, best_provider.higher_position())
 
-    def test_when_substract_providers_then_all_of_those_must_not_be_anymore(self):
+    def test_when_subtract_providers_then_all_of_those_must_not_be_anymore(self):
         # given
         service = ProviderService()
-        providers = [
-            Provider(radius=250, position=980, provider_id=1),
-            Provider(radius=100, position=500, provider_id=2),
-            Provider(radius=150, position=600, provider_id=3),
-            Provider(radius=300, position=850, provider_id=4),
-            Provider(radius=80, position=270, provider_id=5),
-            Provider(radius=100, position=100, provider_id=6),
-            Provider(radius=200, position=300, provider_id=7),
-            Provider(radius=120, position=400, provider_id=8),
-            Provider(radius=220, position=680, provider_id=9),
-            Provider(radius=150, position=50, provider_id=10)
-        ]
-        providers_to_subtract = [
-            Provider(radius=100, position=500, provider_id=2),
-            Provider(radius=150, position=600, provider_id=3),
-            Provider(radius=300, position=850, provider_id=4),
-            Provider(radius=80, position=270, provider_id=5),
-            Provider(radius=100, position=100, provider_id=6),
-            Provider(radius=200, position=300, provider_id=7),
-            Provider(radius=120, position=400, provider_id=8),
-            Provider(radius=220, position=680, provider_id=9)
-        ]
+        providers = instance_one()
+        providers_to_subtract = instance_two()
 
         # when
         providers = service.subtract(providers, providers_to_subtract)
@@ -65,18 +35,7 @@ class TestProviderService(TestCase):
     def test_when_sort_providers_then_they_must_be_sorted_by_lower_position(self):
         # given
         service = ProviderService()
-        providers = [
-            Provider(radius=250, position=980, provider_id=1),
-            Provider(radius=100, position=500, provider_id=2),
-            Provider(radius=150, position=600, provider_id=3),
-            Provider(radius=300, position=850, provider_id=4),
-            Provider(radius=80, position=270, provider_id=5),
-            Provider(radius=100, position=100, provider_id=6),
-            Provider(radius=200, position=300, provider_id=7),
-            Provider(radius=120, position=400, provider_id=8),
-            Provider(radius=220, position=680, provider_id=9),
-            Provider(radius=150, position=50, provider_id=10)
-        ]
+        providers = instance_one()
 
         # when
         sorted_providers = service.sort(providers)
@@ -93,21 +52,11 @@ class TestProviderService(TestCase):
         self.assertTrue(4, sorted_providers[8].id)
         self.assertTrue(1, sorted_providers[9].id)
 
-    def test_when_find_providers_with_coverage_below_position_then_all_with_a_lower_position_smaller_must_be_retrieved(self):
+    def test_when_find_providers_with_coverage_below_position_then_all_with_a_lower_position_smaller_must_be_retrieved(
+            self):
         # given
         service = ProviderService()
-        providers = [
-            Provider(radius=250, position=980, provider_id=1),
-            Provider(radius=100, position=500, provider_id=2),
-            Provider(radius=150, position=600, provider_id=3),
-            Provider(radius=300, position=850, provider_id=4),
-            Provider(radius=80, position=270, provider_id=5),
-            Provider(radius=100, position=100, provider_id=6),
-            Provider(radius=200, position=300, provider_id=7),
-            Provider(radius=120, position=400, provider_id=8),
-            Provider(radius=220, position=680, provider_id=9),
-            Provider(radius=150, position=50, provider_id=10)
-        ]
+        providers = instance_one()
 
         # when
         filtered_providers = service.find_all_with_coverage_below(providers, 200)
