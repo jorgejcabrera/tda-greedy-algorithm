@@ -1,5 +1,6 @@
 from provider import Provider
 import random
+from random import shuffle
 
 
 def instance_one():
@@ -61,4 +62,5 @@ def sample_of(amount_of_providers, kilometers):
         position = random.randint(segments * (i + 1), segments * (i + 2))
         radius = random.randint(1, kilometers)
         providers.append(Provider(provider_id=i, position=position, radius=radius))
+    random.shuffle(providers)
     return providers

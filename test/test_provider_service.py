@@ -57,6 +57,7 @@ class TestProviderService(TestCase):
         # given
         service = ProviderService()
         providers = instance_one()
+        providers = service.sort(providers)
 
         # when
         filtered_providers = service.find_all_with_coverage_below(providers, 200)

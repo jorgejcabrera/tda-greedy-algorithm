@@ -25,5 +25,14 @@ class ProviderService:
         return sorted(providers, key=lambda x: x.lower_position())
 
     def find_all_with_coverage_below(self, providers, position):
+        if providers[0].lower_position() > position:
+            print("There isn't an available provider between positions:", position, "and",
+                  providers[0].lower_position())
+            raise SolutionNotFound()
         return list(
             filter(lambda provider: provider.lower_position() <= position, providers))
+
+
+class SolutionNotFound(Exception):
+    """There isn't any solution for this providers and target position"""
+    pass

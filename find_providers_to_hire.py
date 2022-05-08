@@ -1,4 +1,4 @@
-from provider_service import ProviderService
+from provider_service import ProviderService, SolutionNotFound
 
 
 class FindProvidersToHireUseCase:
@@ -17,6 +17,9 @@ class FindProvidersToHireUseCase:
             new_provider = self.service.find_the_best_of(filtered_providers)
             providers_to_hire.append(new_provider)
             coverage = new_provider.higher_position()
+        if coverage < target_position:
+            print("There aren't enough providers to cover the expected area.")
+            raise SolutionNotFound()
         return providers_to_hire
 
     def invoke_v2(self, providers, target_position):
@@ -26,10 +29,19 @@ class FindProvidersToHireUseCase:
 
         while coverage < target_position and len(sorted_providers) > 0:
             best_provider = sorted_providers.pop(0)
+            if not best_provider.is_below(coverage):
+                print("There isn't an available provider between positions:", coverage, "and",
+                      best_provider.lower_position())
+                raise SolutionNotFound()
             while len(sorted_providers) > 0 and sorted_providers[0].lower_position() <= coverage:
                 next_provider = sorted_providers.pop(0)
                 if next_provider.higher_position() >= best_provider.higher_position():
                     best_provider = next_provider
             coverage = best_provider.higher_position()
             providers_to_hire.append(best_provider)
+
+        if coverage < target_position:
+            print("There aren't enough providers to cover the expected area.")
+            raise SolutionNotFound()
+
         return providers_to_hire

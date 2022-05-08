@@ -21,3 +21,9 @@ class Provider:
 
     def higher_position(self):
         return self.position + self.radius
+
+    def available_in(self, position):
+        return self.lower_position() <= position <= self.higher_position()
+
+    def is_below(self, position):
+        return self.lower_position() <= position

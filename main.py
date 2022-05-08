@@ -10,7 +10,7 @@ if __name__ == '__main__':
         kilometers = sys.argv[2]
     except:
         print("Taking default values")
-        file_path = "contratos.txt"
+        file_path = "contratos_1.txt"
         kilometers = 200
 
     reader = ProviderReader(file_path)

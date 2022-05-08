@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from find_providers_to_hire import FindProvidersToHireUseCase
 from provider import Provider
+from provider_service import SolutionNotFound
 from test.providers_factory import instance_one, instance_three, instance_two, instance_four
 
 
@@ -64,7 +65,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = instance_four()
 
         # when
-        providers_to_hire = use_case.invoke_v1(providers, 1000)
+        providers_to_hire = use_case.invoke_v2(providers, 1000)
 
         # then
         self.assertTrue(len(providers_to_hire) == 3)
@@ -113,18 +114,30 @@ class TestFindProvidersToHireUseCase(TestCase):
         self.assertTrue(Provider(radius=40, position=140, provider_id=3)
                         in providers_to_hire)
 
-    def test_instance_without_a_solution_should_find_at_least_a_couple_of_providers(self):
-        # given
-        use_case = FindProvidersToHireUseCase()
-        providers = [
-            Provider(radius=50, position=50, provider_id=1),
-            Provider(radius=50, position=100, provider_id=2),
-            Provider(radius=40, position=140, provider_id=3),
-            Provider(radius=30, position=150, provider_id=4)
-        ]
+    def test_instance_without_a_solution_must_throw_an_error(self):
+        with self.assertRaises(SolutionNotFound):
+            # given
+            use_case = FindProvidersToHireUseCase()
+            providers = [
+                Provider(radius=50, position=50, provider_id=1),
+                Provider(radius=50, position=100, provider_id=2),
+                Provider(radius=40, position=140, provider_id=3),
+                Provider(radius=30, position=150, provider_id=4)
+            ]
 
-        # when
-        providers_to_hire = use_case.invoke_v1(providers, 1000)
+            # when
+            use_case.invoke_v1(providers, 1000)
 
-        # then
-        self.assertTrue(len(providers_to_hire) == 3)
+    def test_instance_without_a_complete_coverage_offer_must_throw_an_error(self):
+        with self.assertRaises(SolutionNotFound):
+            # given
+            use_case = FindProvidersToHireUseCase()
+            providers = [
+                Provider(radius=50, position=50, provider_id=1),
+                Provider(radius=50, position=120, provider_id=2),
+                Provider(radius=20, position=210, provider_id=3),
+                Provider(radius=40, position=250, provider_id=4)
+            ]
+
+            # when
+            use_case.invoke_v2(providers, 250)
