@@ -1,6 +1,5 @@
-from provider import Provider
+from src.model.provider import Provider
 import random
-from random import shuffle
 
 
 def instance_one():

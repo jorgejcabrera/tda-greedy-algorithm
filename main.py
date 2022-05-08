@@ -1,7 +1,7 @@
 import sys
 
-from find_providers_to_hire import FindProvidersToHireUseCase
-from provider_reader import ProviderReader
+from src.use_case.find_providers_to_hire import FindProvidersToHireUseCase
+from src.model.provider_reader import ProviderReader
 
 if __name__ == '__main__':
 

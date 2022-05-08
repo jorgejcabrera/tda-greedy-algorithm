@@ -1,4 +1,4 @@
-from provider_service import ProviderService, SolutionNotFound
+from src.model.provider_service import ProviderService, SolutionNotFound
 
 
 class FindProvidersToHireUseCase:

@@ -1,8 +1,8 @@
 import unittest
 
-from find_providers_to_hire import FindProvidersToHireUseCase
-from provider_reader import ProviderReader
-from provider_service import SolutionNotFound
+from src.use_case.find_providers_to_hire import FindProvidersToHireUseCase
+from src.model.provider_reader import ProviderReader
+from src.model.provider_service import SolutionNotFound
 
 
 class TestIntegration(unittest.TestCase):

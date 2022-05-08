@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from find_providers_to_hire import FindProvidersToHireUseCase
-from provider import Provider
-from provider_service import SolutionNotFound
+from src.use_case.find_providers_to_hire import FindProvidersToHireUseCase
+from src.model.provider import Provider
+from src.model.provider_service import SolutionNotFound
 from test.providers_factory import instance_one, instance_three, instance_two, instance_four
 
 

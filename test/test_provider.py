@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from provider import Provider
+from src.model.provider import Provider
 
 
 class TestProvider(TestCase):

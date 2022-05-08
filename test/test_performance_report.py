@@ -3,7 +3,7 @@ from unittest import TestCase
 
 import matplotlib.pyplot as plt
 
-from find_providers_to_hire import FindProvidersToHireUseCase
+from src.use_case.find_providers_to_hire import FindProvidersToHireUseCase
 from test.providers_factory import sample_of
 
 

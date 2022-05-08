@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from provider import Provider
-from provider_service import ProviderService
+from src.model.provider import Provider
+from src.model.provider_service import ProviderService
 from test.providers_factory import instance_one, instance_two
 
 

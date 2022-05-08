@@ -1,4 +1,4 @@
-from provider import Provider
+from src.model.provider import Provider
 
 
 class ProviderReader:
