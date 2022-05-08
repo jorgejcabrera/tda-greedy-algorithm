@@ -23,7 +23,7 @@ class TestPerformanceReport(TestCase):
             providers = sample_of(amount_of_providers, kilometers)
 
             started_time_v2 = current_milli_time()
-            find_providers_to_hire.invoke_v2(providers, kilometers)
+            find_providers_to_hire.invoke(providers, kilometers)
             end_time_v2 = current_milli_time() - started_time_v2
 
             x.append(amount_of_providers)

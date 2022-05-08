@@ -14,7 +14,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = instance_one()
 
         # when
-        providers_to_hire = use_case.invoke_v2(providers, 1000)
+        providers_to_hire = use_case.invoke(providers, 1000)
 
         # then
         self.assertTrue(len(providers_to_hire) == 4)
@@ -33,7 +33,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = instance_two()
 
         # when
-        providers_to_hire = use_case.invoke_v2(providers, 500)
+        providers_to_hire = use_case.invoke(providers, 500)
 
         # then
         self.assertTrue(len(providers_to_hire) == 2)
@@ -48,7 +48,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = instance_three()
 
         # when
-        providers_to_hire = use_case.invoke_v2(providers, 500)
+        providers_to_hire = use_case.invoke(providers, 500)
 
         # then
         self.assertTrue(len(providers_to_hire) == 3)
@@ -65,7 +65,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = instance_four()
 
         # when
-        providers_to_hire = use_case.invoke_v2(providers, 1000)
+        providers_to_hire = use_case.invoke(providers, 1000)
 
         # then
         self.assertTrue(len(providers_to_hire) == 3)
@@ -85,7 +85,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         ]
 
         # when
-        providers_to_hire = use_case.invoke_v2(providers, 1000)
+        providers_to_hire = use_case.invoke(providers, 1000)
 
         # then
         self.assertTrue(len(providers_to_hire) == 2)
@@ -105,7 +105,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         ]
 
         # when
-        providers_to_hire = use_case.invoke_v2(providers, 180)
+        providers_to_hire = use_case.invoke(providers, 180)
 
         # then
         self.assertTrue(len(providers_to_hire) == 2)
@@ -126,7 +126,7 @@ class TestFindProvidersToHireUseCase(TestCase):
             ]
 
             # when
-            use_case.invoke_v2(providers, 1000)
+            use_case.invoke(providers, 1000)
 
     def test_instance_without_a_complete_coverage_offer_must_throw_an_error(self):
         with self.assertRaises(SolutionNotFound):
@@ -140,4 +140,4 @@ class TestFindProvidersToHireUseCase(TestCase):
             ]
 
             # when
-            use_case.invoke_v2(providers, 250)
+            use_case.invoke(providers, 250)
