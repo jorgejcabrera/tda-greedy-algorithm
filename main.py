@@ -1,7 +1,7 @@
 import sys
 
-from src.use_case.find_providers_to_hire import FindProvidersToHireUseCase
 from src.model.provider_reader import ProviderReader
+from src.use_case.find_providers_to_hire import invoke
 
 if __name__ == '__main__':
 
@@ -15,6 +15,5 @@ if __name__ == '__main__':
 
     reader = ProviderReader(file_path)
     providers = reader.read()
-    use_case = FindProvidersToHireUseCase()
-    providers_to_hire = use_case.invoke(providers, int(kilometers))
+    providers_to_hire = invoke(providers, int(kilometers))
     print(providers_to_hire)

@@ -4,7 +4,7 @@ from unittest import TestCase
 import matplotlib.pyplot as plt
 
 from src.model.provider_service import ProviderService
-from src.use_case.find_providers_to_hire import FindProvidersToHireUseCase
+from src.use_case.find_providers_to_hire import invoke
 from test.providers_factory import sample_of
 
 
@@ -18,9 +18,8 @@ service = ProviderService()
 class TestPerformanceReport(TestCase):
 
     def test_measure_of_greedy_v1_implementation(self):
-        find_providers_to_hire = FindProvidersToHireUseCase()
         amount_of_providers = 1000
-        kilometers = 50000
+        kilometers = 10000
         x = []
         y_v2 = []
         while amount_of_providers < kilometers:
@@ -28,7 +27,7 @@ class TestPerformanceReport(TestCase):
             providers = service.sort(providers)
 
             started_time_v2 = current_milli_time()
-            find_providers_to_hire.invoke(providers, kilometers)
+            invoke(providers, kilometers)
             end_time_v2 = current_milli_time() - started_time_v2
 
             x.append(amount_of_providers)

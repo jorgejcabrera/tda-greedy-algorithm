@@ -8,6 +8,9 @@ class ProviderReader:
         self.path = path
         self.service = ProviderService()
 
+    # #
+    # POST: A list of sorted providers must be returned
+    # #
     def read(self):
         file = open(self.path)
         providers = []
