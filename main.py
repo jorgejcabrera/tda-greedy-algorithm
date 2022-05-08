@@ -16,5 +16,5 @@ if __name__ == '__main__':
     reader = ProviderReader(file_path)
     providers = reader.read()
     use_case = FindProvidersToHireUseCase()
-    providers_to_hire = use_case.invoke_v1(providers, int(kilometers))
+    providers_to_hire = use_case.invoke_v2(providers, int(kilometers))
     print(providers_to_hire)

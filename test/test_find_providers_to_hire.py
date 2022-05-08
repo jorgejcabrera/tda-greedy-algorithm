@@ -126,7 +126,7 @@ class TestFindProvidersToHireUseCase(TestCase):
             ]
 
             # when
-            use_case.invoke_v1(providers, 1000)
+            use_case.invoke_v2(providers, 1000)
 
     def test_instance_without_a_complete_coverage_offer_must_throw_an_error(self):
         with self.assertRaises(SolutionNotFound):
