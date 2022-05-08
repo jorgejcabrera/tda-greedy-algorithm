@@ -2,8 +2,10 @@ from unittest import TestCase
 
 from src.use_case.find_providers_to_hire import FindProvidersToHireUseCase
 from src.model.provider import Provider
-from src.model.provider_service import SolutionNotFound
+from src.model.provider_service import SolutionNotFound, ProviderService
 from test.providers_factory import instance_one, instance_three, instance_two, instance_four
+
+service = ProviderService()
 
 
 class TestFindProvidersToHireUseCase(TestCase):
@@ -12,6 +14,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         # given
         use_case = FindProvidersToHireUseCase()
         providers = instance_one()
+        providers = service.sort(providers)
 
         # when
         providers_to_hire = use_case.invoke(providers, 1000)
@@ -31,6 +34,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         # given
         use_case = FindProvidersToHireUseCase()
         providers = instance_two()
+        providers = service.sort(providers)
 
         # when
         providers_to_hire = use_case.invoke(providers, 500)
@@ -46,6 +50,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         # given
         use_case = FindProvidersToHireUseCase()
         providers = instance_three()
+        providers = service.sort(providers)
 
         # when
         providers_to_hire = use_case.invoke(providers, 500)
@@ -63,6 +68,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         # given
         use_case = FindProvidersToHireUseCase()
         providers = instance_four()
+        providers = service.sort(providers)
 
         # when
         providers_to_hire = use_case.invoke(providers, 1000)
@@ -83,6 +89,7 @@ class TestFindProvidersToHireUseCase(TestCase):
             Provider(radius=250, position=250, provider_id=1),
             Provider(radius=250, position=750, provider_id=2)
         ]
+        providers = service.sort(providers)
 
         # when
         providers_to_hire = use_case.invoke(providers, 1000)
@@ -103,6 +110,7 @@ class TestFindProvidersToHireUseCase(TestCase):
             Provider(radius=40, position=140, provider_id=3),
             Provider(radius=30, position=150, provider_id=4)
         ]
+        providers = service.sort(providers)
 
         # when
         providers_to_hire = use_case.invoke(providers, 180)
@@ -124,6 +132,7 @@ class TestFindProvidersToHireUseCase(TestCase):
                 Provider(radius=40, position=140, provider_id=3),
                 Provider(radius=30, position=150, provider_id=4)
             ]
+            providers = service.sort(providers)
 
             # when
             use_case.invoke(providers, 1000)
@@ -138,6 +147,7 @@ class TestFindProvidersToHireUseCase(TestCase):
                 Provider(radius=20, position=210, provider_id=3),
                 Provider(radius=40, position=250, provider_id=4)
             ]
+            providers = service.sort(providers)
 
             # when
             use_case.invoke(providers, 250)

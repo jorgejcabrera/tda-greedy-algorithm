@@ -60,6 +60,9 @@ def sample_of(amount_of_providers, kilometers):
     for i in range(amount_of_providers):
         position = random.randint(segments * (i + 1), segments * (i + 2))
         radius = random.randint(1, kilometers)
-        providers.append(Provider(provider_id=i, position=position, radius=radius))
+        providers.append(Provider(
+            provider_id=i,
+            position=position,
+            radius=radius))
     random.shuffle(providers)
     return providers

@@ -6,8 +6,10 @@ class FindProvidersToHireUseCase:
     def __init__(self):
         self.service = ProviderService()
 
-    def invoke(self, providers, target_position):
-        sorted_providers = self.service.sort(providers)
+    #
+    # PRE: The providers must be sorted, otherwise it won't work properly.
+    # #
+    def invoke(self, sorted_providers, target_position):
         last_position_covered = 0
         providers_to_hire = []
 
