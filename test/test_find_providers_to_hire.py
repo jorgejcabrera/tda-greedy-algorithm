@@ -14,7 +14,6 @@ class TestFindProvidersToHireUseCase(TestCase):
         # given
         use_case = FindProvidersToHireUseCase()
         providers = instance_one()
-        providers = service.sort(providers)
 
         # when
         providers_to_hire = use_case.invoke(providers, 1000)
@@ -34,7 +33,6 @@ class TestFindProvidersToHireUseCase(TestCase):
         # given
         use_case = FindProvidersToHireUseCase()
         providers = instance_two()
-        providers = service.sort(providers)
 
         # when
         providers_to_hire = use_case.invoke(providers, 500)
@@ -50,7 +48,6 @@ class TestFindProvidersToHireUseCase(TestCase):
         # given
         use_case = FindProvidersToHireUseCase()
         providers = instance_three()
-        providers = service.sort(providers)
 
         # when
         providers_to_hire = use_case.invoke(providers, 500)
@@ -68,7 +65,6 @@ class TestFindProvidersToHireUseCase(TestCase):
         # given
         use_case = FindProvidersToHireUseCase()
         providers = instance_four()
-        providers = service.sort(providers)
 
         # when
         providers_to_hire = use_case.invoke(providers, 1000)

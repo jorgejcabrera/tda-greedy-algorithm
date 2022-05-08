@@ -1,9 +1,13 @@
-from src.model.provider import Provider
 import random
+
+from src.model.provider import Provider
+from src.model.provider_service import ProviderService
+
+service = ProviderService()
 
 
 def instance_one():
-    return [
+    return service.sort([
         Provider(radius=250, position=980, provider_id=1),
         Provider(radius=100, position=500, provider_id=2),
         Provider(radius=150, position=600, provider_id=3),
@@ -14,11 +18,11 @@ def instance_one():
         Provider(radius=120, position=400, provider_id=8),
         Provider(radius=220, position=680, provider_id=9),
         Provider(radius=150, position=50, provider_id=10)
-    ]
+    ])
 
 
 def instance_two():
-    return [
+    return service.sort([
         Provider(radius=100, position=500, provider_id=2),
         Provider(radius=150, position=600, provider_id=3),
         Provider(radius=300, position=850, provider_id=4),
@@ -27,11 +31,11 @@ def instance_two():
         Provider(radius=200, position=300, provider_id=7),
         Provider(radius=120, position=400, provider_id=8),
         Provider(radius=220, position=680, provider_id=9)
-    ]
+    ])
 
 
 def instance_three():
-    return [
+    return service.sort([
         Provider(radius=50, position=44, provider_id=1),
         Provider(radius=150, position=402, provider_id=2),
         Provider(radius=35, position=219, provider_id=3),
@@ -39,11 +43,11 @@ def instance_three():
         Provider(radius=80, position=80, provider_id=5),
         Provider(radius=160, position=300, provider_id=6),
         Provider(radius=30, position=150, provider_id=7)
-    ]
+    ])
 
 
 def instance_four():
-    return [
+    return service.sort([
         Provider(radius=150, position=50, provider_id=1),
         Provider(radius=100, position=100, provider_id=2),
         Provider(radius=150, position=300, provider_id=3),
@@ -51,7 +55,7 @@ def instance_four():
         Provider(radius=275, position=450, provider_id=5),
         Provider(radius=50, position=650, provider_id=6),
         Provider(radius=150, position=850, provider_id=7)
-    ]
+    ])
 
 
 def sample_of(amount_of_providers, kilometers):
