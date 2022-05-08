@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from src.model.provider import Provider
 from src.model.provider_service import SolutionNotFound, ProviderService
-from src.use_case.find_providers_to_hire import invoke
+from src.use_case.find_providers_to_hire import find_providers_to_hire
 from test.providers_factory import instance_one, instance_three, instance_two, instance_four
 
 service = ProviderService()
@@ -15,7 +15,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = instance_one()
 
         # when
-        providers_to_hire = invoke(providers, 1000)
+        providers_to_hire = find_providers_to_hire(providers, 1000)
 
         # then
         self.assertTrue(len(providers_to_hire) == 4)
@@ -33,7 +33,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = instance_two()
 
         # when
-        providers_to_hire = invoke(providers, 500)
+        providers_to_hire = find_providers_to_hire(providers, 500)
 
         # then
         self.assertTrue(len(providers_to_hire) == 2)
@@ -47,7 +47,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = instance_three()
 
         # when
-        providers_to_hire = invoke(providers, 500)
+        providers_to_hire = find_providers_to_hire(providers, 500)
 
         # then
         self.assertTrue(len(providers_to_hire) == 3)
@@ -63,7 +63,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = instance_four()
 
         # when
-        providers_to_hire = invoke(providers, 1000)
+        providers_to_hire = find_providers_to_hire(providers, 1000)
 
         # then
         self.assertTrue(len(providers_to_hire) == 3)
@@ -83,7 +83,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = service.sort(providers)
 
         # when
-        providers_to_hire = invoke(providers, 1000)
+        providers_to_hire = find_providers_to_hire(providers, 1000)
 
         # then
         self.assertTrue(len(providers_to_hire) == 2)
@@ -103,7 +103,7 @@ class TestFindProvidersToHireUseCase(TestCase):
         providers = service.sort(providers)
 
         # when
-        providers_to_hire = invoke(providers, 180)
+        providers_to_hire = find_providers_to_hire(providers, 180)
 
         # then
         self.assertTrue(len(providers_to_hire) == 2)
@@ -124,7 +124,7 @@ class TestFindProvidersToHireUseCase(TestCase):
             providers = service.sort(providers)
 
             # when
-            invoke(providers, 1000)
+            find_providers_to_hire(providers, 1000)
 
     def test_instance_without_a_complete_coverage_offer_must_throw_an_error(self):
         with self.assertRaises(SolutionNotFound):
@@ -138,4 +138,4 @@ class TestFindProvidersToHireUseCase(TestCase):
             providers = service.sort(providers)
 
             # when
-            invoke(providers, 250)
+            find_providers_to_hire(providers, 250)

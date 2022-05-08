@@ -2,7 +2,7 @@ import unittest
 
 from src.model.provider_reader import ProviderReader
 from src.model.provider_service import SolutionNotFound
-from src.use_case.find_providers_to_hire import invoke
+from src.use_case.find_providers_to_hire import find_providers_to_hire
 
 
 class TestIntegration(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestIntegration(unittest.TestCase):
             providers = reader.read()
 
             # when
-            invoke(providers, int(100))
+            find_providers_to_hire(providers, int(100))
 
     def test_reading_contratos_3_file_without_any_solution_must_throw_an_error(self):
         with self.assertRaises(SolutionNotFound):
@@ -23,7 +23,7 @@ class TestIntegration(unittest.TestCase):
             providers = reader.read()
 
             # when
-            invoke(providers, int(110))
+            find_providers_to_hire(providers, int(110))
 
     def test_reading_contratos_1_file_with_a_solution_must_not_throw_an_error(self):
         # given
@@ -31,7 +31,7 @@ class TestIntegration(unittest.TestCase):
         providers = reader.read()
 
         # when
-        providers = invoke(providers, int(110))
+        providers = find_providers_to_hire(providers, int(110))
 
         # then
         self.assertTrue(1 == len(providers))
@@ -42,7 +42,7 @@ class TestIntegration(unittest.TestCase):
         providers = reader.read()
 
         # when
-        providers = invoke(providers, int(225))
+        providers = find_providers_to_hire(providers, int(225))
 
         # then
         self.assertTrue(2 == len(providers))
@@ -53,7 +53,7 @@ class TestIntegration(unittest.TestCase):
         providers = reader.read()
 
         # when
-        providers = invoke(providers, int(275))
+        providers = find_providers_to_hire(providers, int(275))
 
         # then
         self.assertTrue(2 == len(providers))
@@ -64,7 +64,7 @@ class TestIntegration(unittest.TestCase):
         providers = reader.read()
 
         # when
-        providers = invoke(providers, int(275))
+        providers = find_providers_to_hire(providers, int(275))
 
         # then
         self.assertTrue(2 == len(providers))
@@ -76,7 +76,7 @@ class TestIntegration(unittest.TestCase):
             providers = reader.read()
 
             # when
-            invoke(providers, int(400))
+            find_providers_to_hire(providers, int(400))
 
     def test_reading_contratos_8_file_with_a_solution_must_not_include_unnecessary_providers(self):
         # given
@@ -84,7 +84,7 @@ class TestIntegration(unittest.TestCase):
         providers = reader.read()
 
         # when
-        providers = invoke(providers, int(400))
+        providers = find_providers_to_hire(providers, int(400))
 
         # then
         self.assertTrue(4 == len(providers))

@@ -4,7 +4,7 @@ from unittest import TestCase
 import matplotlib.pyplot as plt
 
 from src.model.provider_service import ProviderService
-from src.use_case.find_providers_to_hire import invoke
+from src.use_case.find_providers_to_hire import find_providers_to_hire
 from test.providers_factory import sample_of
 
 
@@ -27,7 +27,7 @@ class TestPerformanceReport(TestCase):
             providers = service.sort(providers)
 
             started_time_v2 = current_milli_time()
-            invoke(providers, kilometers)
+            find_providers_to_hire(providers, kilometers)
             end_time_v2 = current_milli_time() - started_time_v2
 
             x.append(amount_of_providers)

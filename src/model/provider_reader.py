@@ -22,4 +22,5 @@ class ProviderReader:
                 provider_id=int(data[0]))
             )
         file.close()
-        return self.service.sort(providers)
+        providers = self.service.sort(providers)
+        return providers

@@ -1,10 +1,10 @@
-from src.model.provider_service import ProviderService, SolutionNotFound
+from src.model.provider_service import SolutionNotFound
 
 
 #
 # PRE: The providers must be sorted, otherwise it won't work properly.
 # #
-def invoke(sorted_providers, target_position):
+def find_providers_to_hire(sorted_providers, target_position):
     last_position_covered = 0
     providers_to_hire = []
 
