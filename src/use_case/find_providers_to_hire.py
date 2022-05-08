@@ -8,23 +8,23 @@ class FindProvidersToHireUseCase:
 
     def invoke(self, providers, target_position):
         sorted_providers = self.service.sort(providers)
-        coverage = 0
+        last_position_covered = 0
         providers_to_hire = []
 
-        while coverage < target_position and len(sorted_providers) > 0:
+        while last_position_covered < target_position and len(sorted_providers) > 0:
             best_provider = sorted_providers.pop(0)
-            if not best_provider.is_below(coverage):
-                print("There isn't an available provider between positions:", coverage, "and",
+            if not best_provider.is_below(last_position_covered):
+                print("There isn't an available provider between positions:", last_position_covered, "and",
                       best_provider.lower_position())
                 raise SolutionNotFound()
-            while len(sorted_providers) > 0 and sorted_providers[0].is_below(coverage):
+            while len(sorted_providers) > 0 and sorted_providers[0].is_below(last_position_covered):
                 next_provider = sorted_providers.pop(0)
                 if next_provider.higher_position() >= best_provider.higher_position():
                     best_provider = next_provider
-            coverage = best_provider.higher_position()
+            last_position_covered = best_provider.higher_position()
             providers_to_hire.append(best_provider)
 
-        if coverage < target_position:
+        if last_position_covered < target_position:
             print("There aren't enough providers to cover the expected area.")
             raise SolutionNotFound()
 

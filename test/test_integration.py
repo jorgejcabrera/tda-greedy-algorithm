@@ -38,3 +38,62 @@ class TestIntegration(unittest.TestCase):
 
         # then
         self.assertTrue(1 == len(providers))
+
+    def test_reading_contratos_4_file_with_a_solution_must_not_include_unnecessary_providers(self):
+        # given
+        reader = ProviderReader("../files/contratos_4.txt")
+        providers = reader.read()
+        use_case = FindProvidersToHireUseCase()
+
+        # when
+        providers = use_case.invoke(providers, int(225))
+
+        # then
+        self.assertTrue(2 == len(providers))
+
+    def test_reading_contratos_5_file_with_a_solution_must_not_include_unnecessary_providers(self):
+        # given
+        reader = ProviderReader("../files/contratos_5.txt")
+        providers = reader.read()
+        use_case = FindProvidersToHireUseCase()
+
+        # when
+        providers = use_case.invoke(providers, int(275))
+
+        # then
+        self.assertTrue(2 == len(providers))
+
+    def test_reading_contratos_6_file_with_a_solution_must_not_include_unnecessary_providers(self):
+        # given
+        reader = ProviderReader("../files/contratos_6.txt")
+        providers = reader.read()
+        use_case = FindProvidersToHireUseCase()
+
+        # when
+        providers = use_case.invoke(providers, int(275))
+
+        # then
+        self.assertTrue(2 == len(providers))
+
+    def test_reading_contratos_7_without_a_solution_must_throw_an_error(self):
+        with self.assertRaises(SolutionNotFound):
+            # given
+            reader = ProviderReader("../files/contratos_7.txt")
+            providers = reader.read()
+            use_case = FindProvidersToHireUseCase()
+
+            # when
+            providers = use_case.invoke(providers, int(400))
+
+    def test_reading_contratos_8_file_with_a_solution_must_not_include_unnecessary_providers(self):
+        # given
+        reader = ProviderReader("../files/contratos_8.txt")
+        providers = reader.read()
+        use_case = FindProvidersToHireUseCase()
+
+        # when
+        providers = use_case.invoke(providers, int(400))
+
+        # then
+        self.assertTrue(4 == len(providers))
+
